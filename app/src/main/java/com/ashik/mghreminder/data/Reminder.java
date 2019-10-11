@@ -9,7 +9,6 @@ import androidx.room.PrimaryKey;
 public class Reminder {
 
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     private int id;
     @NonNull
     private String title;
@@ -24,12 +23,14 @@ public class Reminder {
     @Nullable
     private double lon;
     @Nullable
-    private boolean completed;
+    private String active;
 
-    public Reminder(String title, String date, String time) {
+    public Reminder(String title, String date, String time, String address, String active) {
         this.title = title;
         this.date = date;
         this.time = time;
+        this.address = address;
+        this.active = active;
     }
 
     public int getId() {
@@ -88,12 +89,12 @@ public class Reminder {
         this.lon = lon;
     }
 
-    public boolean isCompleted() {
-        return completed;
+    @Nullable
+    public String getActive() {
+        return active;
     }
 
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
+    public void setActive(@Nullable String active) {
+        this.active = active;
     }
-
 }

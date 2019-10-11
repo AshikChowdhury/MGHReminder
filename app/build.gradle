@@ -29,7 +29,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.getbase:floatingactionbutton:1.10.1'
-    implementation 'com.github.jarklee:MaterialDateTimePicker:2.5.3'
+    implementation 'com.wdullaer:materialdatetimepicker:1.2.1'
     implementation 'com.bignerdranch.android:recyclerview-multiselect:0.2'
     implementation 'com.wrapp.floatlabelededittext:library:0.0.6'
     implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
