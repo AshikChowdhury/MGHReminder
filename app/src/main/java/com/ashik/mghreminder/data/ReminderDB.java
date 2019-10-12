@@ -44,9 +44,8 @@ public abstract class ReminderDB extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            reminderDao.insert(new Reminder("Title1", "30/12/1995", "14:25","","True"));
-            reminderDao.insert(new Reminder("Title1", "30/12/1995", "14:25","","True"));
-            reminderDao.insert(new Reminder("Title1", "30/12/1995", "14:25","","True"));
+//            reminderDao.insert(new Reminder("Square Hospital", "30/12/2019", "14:25","Square Hospital",23.7623106,90.3713897,"True"));
+//            reminderDao.insert(new Reminder("Visit Square Hospital", "01/12/2019", "14:25","Square Hospital",23.7623106,90.3713897,"True"));
             return null;
         }
     }

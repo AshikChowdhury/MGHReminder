@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="?android:attr/selectableItemBackground"
-    android:layout_height="86dp">
+    android:layout_height="95dp">
 
     <ImageView
         android:id="@+id/thumbnail_image"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/abc_primary_text_material_dark"
             tools:text="Title"
-            android:textSize="20sp"/>
+            android:textSize="17sp"/>
 
         <TextView
             android:id="@+id/recycle_date_time"

@@ -29,13 +29,17 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import java.util.Arrays;
 import java.util.Calendar;
 
-public class AddEditReminderActivity extends AppCompatActivity implements
+public class AddReminderActivity extends AppCompatActivity implements
         TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
     public static final String EXTRA_TITLE =
             "com.ashik.mghreminder.EXTRA_TITLE";
     public static final String EXTRA_LOCATION =
             "com.ashik.mghreminder.EXTRA_LOCATION";
+    public static final String EXTRA_LAT =
+            "com.ashik.mghreminder.EXTRA_LAT";
+    public static final String EXTRA_LON =
+            "com.ashik.mghreminder.EXTRA_LON";
     public static final String EXTRA_DATE =
             "com.chowdhury.ashik.mytodo.EXTRA_DATE";
     public static final String EXTRA_TIME =
@@ -53,6 +57,8 @@ public class AddEditReminderActivity extends AppCompatActivity implements
     private int mYear, mMonth, mHour, mMinute, mDay;
     private String mTitle;
     private String mLocation;
+    private double latitude;
+    private double longitude;
     private String mTime;
     private String mDate;
     private String mActive;
@@ -64,7 +70,6 @@ public class AddEditReminderActivity extends AppCompatActivity implements
 
         toolbar = findViewById(R.id.toolbar);
         mReminderTitle = findViewById(R.id.reminder_title);
-//        mReminderLocaion = findViewById(R.id.location);
         mDateText =  findViewById(R.id.set_date);
         mTimeText = findViewById(R.id.set_time);
         mFAB1 = findViewById(R.id.starred1);
@@ -98,12 +103,14 @@ public class AddEditReminderActivity extends AppCompatActivity implements
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
                 getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
 
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME,Place.Field.LAT_LNG));
 
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
                 mLocation = place.getName();
+                latitude = place.getLatLng().latitude;
+                longitude = place.getLatLng().longitude;
                 // TODO: Get info about the selected place.
                 Log.e("Place", "Place: " + place.getName() + ", " + place.getLatLng());
             }
@@ -114,7 +121,6 @@ public class AddEditReminderActivity extends AppCompatActivity implements
                 Log.e("Place", "An error occurred: " + status);
             }
         });
-
 
         // Setup Reminder Title EditText
         mReminderTitle.addTextChangedListener(new TextWatcher() {
@@ -204,6 +210,8 @@ public class AddEditReminderActivity extends AppCompatActivity implements
         Intent data = new Intent();
         data.putExtra(EXTRA_TITLE, mTitle);
         data.putExtra(EXTRA_LOCATION, mLocation);
+        data.putExtra(EXTRA_LAT, latitude);
+        data.putExtra(EXTRA_LON, longitude);
         data.putExtra(EXTRA_DATE, mDate);
         data.putExtra(EXTRA_TIME, mTime);
         data.putExtra(EXTRA_ACTIVE, mActive);
@@ -244,23 +252,15 @@ public class AddEditReminderActivity extends AppCompatActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // On clicking the back arrow
-            // Discard any changes
+
             case android.R.id.home:
                 onBackPressed();
                 return true;
 
-            // On clicking save reminder button
-            // Update reminder
             case R.id.save_reminder:
                 mReminderTitle.setText(mTitle);
-//                mLocation = mReminderLocaion.getText().toString();
-
                 if (mReminderTitle.getText().toString().length() == 0) {
                     mReminderTitle.setError("Reminder Title cannot be blank!");
-
-//                }else if (mReminderLocaion.getText().toString().length() == 0){
-//                    mReminderLocaion.setError("Reminder Location cannot be blank!");
                 }else {
                     saveReminder();
                 }

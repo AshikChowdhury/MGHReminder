@@ -7,16 +7,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:minHeight="?attr/actionBarSize"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="16dp"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:background="#37474f"/>
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/toolbar"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:minHeight="?attr/actionBarSize"-->
+<!--        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+<!--        app:contentInsetLeft="0dp"-->
+<!--        app:contentInsetStart="16dp"-->
+<!--        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+<!--        android:background="#37474f"/>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,21 +27,21 @@
         android:orientation="vertical"
         android:layout_height="80dp">
 
-        <EditText
-            android:id="@+id/reminder_title"
+        <TextView
+            android:id="@+id/view_reminder_title"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginStart="72dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="16dp"
             android:gravity="top"
             android:hint="@string/add_reminder"
-            android:inputType="textCapWords|textMultiLine"
             android:lines="2"
             android:minLines="2"
             android:scrollHorizontally="false"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/darker_gray"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -59,7 +59,7 @@
             <TextView
                 android:id="@+id/details"
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="150dp"
                 android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
@@ -68,54 +68,49 @@
                 android:textSize="20sp"
                 tools:ignore="PrivateResource" />
 
-            <fragment android:id="@+id/autocomplete_fragment"
+            <RelativeLayout
+                android:id="@+id/locationType"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment" />
-<!--            <RelativeLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:id="@+id/locationType"-->
-<!--                android:layout_height="60dp">-->
+                android:layout_height="53dp">
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/repeat_type_icon"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_alignParentStart="true"-->
-<!--                    android:layout_alignParentTop="true"-->
-<!--                    android:layout_marginStart="16dp"-->
-<!--                    android:layout_marginTop="10dp"-->
-<!--                    android:layout_marginEnd="32dp"-->
-<!--                    android:src="@drawable/ic_location_on" />-->
+                <ImageView
+                    android:id="@+id/repeat_type_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="32dp"
+                    android:src="@drawable/ic_location_on" />
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="36dp"-->
-<!--                    android:layout_centerVertical="true"-->
-<!--                    android:layout_toEndOf="@id/repeat_type_icon"-->
-<!--                    android:orientation="vertical">-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/repeat_type_icon"
+                    android:orientation="vertical">
 
-<!--                    <EditText-->
-<!--                        android:id="@+id/location"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:background="@color/mdtp_dark_gray"-->
-<!--                        android:gravity="top"-->
-<!--                        android:hint="Place Name"-->
-<!--                        android:textSize="15sp" />-->
+                    <TextView
+                        android:id="@+id/view_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/mdtp_dark_gray"
+                        android:gravity="top"
+                        android:hint="Place Name"
+                        android:textSize="15sp" />
 
-<!--                </LinearLayout>-->
+                </LinearLayout>
 
-<!--            </RelativeLayout>-->
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/date"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="55dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
-                android:focusable="true"
-                android:onClick="setDate">
+                android:focusable="true">
 
                 <ImageView
                     android:id="@+id/date_icon"
@@ -124,7 +119,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="12dp"
                     android:layout_marginEnd="32dp"
                     android:src="@drawable/ic_view_day_grey" />
 
@@ -144,7 +139,7 @@
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/set_date"
+                        android:id="@+id/view_set_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/abc_secondary_text_material_dark"
@@ -155,12 +150,11 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:clickable="true"
-                android:onClick="setTime"
                 android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
                 android:background="?android:attr/selectableItemBackground"
-                android:layout_height="60dp"
+                android:clickable="true"
                 android:focusable="true">
 
                 <ImageView
@@ -170,16 +164,16 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="12dp"
                     android:layout_marginEnd="32dp"
                     android:src="@drawable/ic_access_time_grey" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@id/time_icon"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/time_text"
@@ -190,18 +184,30 @@
                         android:textSize="15sp" />
 
                     <TextView
+                        android:id="@+id/view_set_time"
                         android:layout_width="wrap_content"
-                        android:id="@+id/set_time"
-                        android:textSize="15sp"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/abc_secondary_text_material_dark"
-                        android:layout_height="wrap_content"/>
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
             </RelativeLayout>
 
-        </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                <fragment android:id="@+id/map_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="445dp"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"/>
+            </RelativeLayout>
 
+        </LinearLayout>
     </ScrollView>
 
     <View
@@ -215,30 +221,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:onClick="selectFab1"
-        fab:fab_icon="@drawable/ic_notifications_off"
-        fab:fab_colorNormal="@color/colorAccent"
-        fab:fab_colorPressed="@color/fab_pressed"
-        app:fab_size="normal"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="8dp"/>
-
-    <com.getbase.floatingactionbutton.FloatingActionButton
-        android:id="@+id/starred2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:onClick="selectFab2"
         fab:fab_icon="@drawable/ic_notifications_active_black_24dp"
         fab:fab_colorNormal="@color/colorAccent"
         fab:fab_colorPressed="@color/fab_pressed"
         app:fab_size="normal"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
-        android:focusable="true" />
+        android:layout_marginLeft="5dp"/>
 
 </RelativeLayout>

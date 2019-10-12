@@ -25,11 +25,13 @@ public class Reminder {
     @Nullable
     private String active;
 
-    public Reminder(String title, String date, String time, String address, String active) {
+    public Reminder(@NonNull String title, @NonNull String date, @NonNull String time, @Nullable String address, double lat, double lon, @Nullable String active) {
         this.title = title;
         this.date = date;
         this.time = time;
         this.address = address;
+        this.lat = lat;
+        this.lon = lon;
         this.active = active;
     }
 
