@@ -67,42 +67,46 @@
                 android:textColor="@color/abc_secondary_text_material_dark"
                 android:textSize="15sp"
                 tools:ignore="PrivateResource" />
-            <RelativeLayout
+
+            <fragment android:id="@+id/autocomplete_fragment"
                 android:layout_width="match_parent"
-                android:id="@+id/locationType"
-                android:onClick="setLocation"
-                android:layout_height="60dp">
+                android:layout_height="wrap_content"
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment" />
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:id="@+id/locationType"-->
+<!--                android:layout_height="60dp">-->
 
-                <ImageView
-                    android:id="@+id/repeat_type_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="32dp"
-                    android:src="@drawable/ic_location_on" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/repeat_type_icon"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_alignParentTop="true"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginEnd="32dp"-->
+<!--                    android:src="@drawable/ic_location_on" />-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/repeat_type_icon"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="36dp"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_toEndOf="@id/repeat_type_icon"-->
+<!--                    android:orientation="vertical">-->
 
-                    <EditText
-                        android:id="@+id/location"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/mdtp_dark_gray"
-                        android:gravity="top"
-                        android:hint="Place Name"
-                        android:textSize="15sp" />
+<!--                    <EditText-->
+<!--                        android:id="@+id/location"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@color/mdtp_dark_gray"-->
+<!--                        android:gravity="top"-->
+<!--                        android:hint="Place Name"-->
+<!--                        android:textSize="15sp" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
 
             <RelativeLayout
                 android:id="@+id/date"

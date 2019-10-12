@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddEditReminderActivity.class);
                 startActivityForResult(intent, ADD_REMINDER_REQUEST);
-                startActivity(intent);
             }
         });
     }

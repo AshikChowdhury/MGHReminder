@@ -3,6 +3,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,10 +16,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.google.android.gms.common.api.Status;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class AddEditReminderActivity extends AppCompatActivity implements
@@ -47,7 +55,7 @@ public class AddEditReminderActivity extends AppCompatActivity implements
     private String mLocation;
     private String mTime;
     private String mDate;
-    private String mActive = "True";
+    private String mActive;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,11 +64,12 @@ public class AddEditReminderActivity extends AppCompatActivity implements
 
         toolbar = findViewById(R.id.toolbar);
         mReminderTitle = findViewById(R.id.reminder_title);
-        mReminderLocaion = findViewById(R.id.location);
+//        mReminderLocaion = findViewById(R.id.location);
         mDateText =  findViewById(R.id.set_date);
         mTimeText = findViewById(R.id.set_time);
         mFAB1 = findViewById(R.id.starred1);
         mFAB2 = findViewById(R.id.starred2);
+        mActive = "True";
 
         mCalendar = Calendar.getInstance();
         mHour = mCalendar.get(Calendar.HOUR_OF_DAY);
@@ -77,6 +86,35 @@ public class AddEditReminderActivity extends AppCompatActivity implements
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.title_activity_add_reminder);
+
+        //Place Auto Complete API Setup
+        String apiKey = getString(R.string.api_key);
+        if (!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(), apiKey);
+        }
+        // Create a new Places client instance.
+        PlacesClient placesClient = Places.createClient(this);
+
+        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                mLocation = place.getName();
+                // TODO: Get info about the selected place.
+                Log.e("Place", "Place: " + place.getName() + ", " + place.getLatLng());
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+                Log.e("Place", "An error occurred: " + status);
+            }
+        });
+
 
         // Setup Reminder Title EditText
         mReminderTitle.addTextChangedListener(new TextWatcher() {
@@ -162,6 +200,7 @@ public class AddEditReminderActivity extends AppCompatActivity implements
 
     // On clicking the save button
     private void saveReminder(){
+
         Intent data = new Intent();
         data.putExtra(EXTRA_TITLE, mTitle);
         data.putExtra(EXTRA_LOCATION, mLocation);
@@ -197,6 +236,7 @@ public class AddEditReminderActivity extends AppCompatActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_add_reminder, menu);
+        menu.findItem(R.id.discard_reminder).setVisible(false);
         return true;
     }
 
@@ -214,13 +254,13 @@ public class AddEditReminderActivity extends AppCompatActivity implements
             // Update reminder
             case R.id.save_reminder:
                 mReminderTitle.setText(mTitle);
-                mLocation = mReminderLocaion.getText().toString();
+//                mLocation = mReminderLocaion.getText().toString();
 
                 if (mReminderTitle.getText().toString().length() == 0) {
                     mReminderTitle.setError("Reminder Title cannot be blank!");
 
-                }else if (mReminderLocaion.getText().toString().length() == 0){
-                    mReminderLocaion.setError("Reminder Location cannot be blank!");
+//                }else if (mReminderLocaion.getText().toString().length() == 0){
+//                    mReminderLocaion.setError("Reminder Location cannot be blank!");
                 }else {
                     saveReminder();
                 }
