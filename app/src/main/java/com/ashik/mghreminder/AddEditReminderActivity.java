@@ -47,7 +47,7 @@ public class AddEditReminderActivity extends AppCompatActivity implements
     private String mLocation;
     private String mTime;
     private String mDate;
-    private String mActive = "true";
+    private String mActive = "True";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
